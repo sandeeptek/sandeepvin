@@ -1,0 +1,355 @@
+{
+    "rabbit_version": "3.6.6",
+    "users": [
+        {
+            "name": "f-wdpr-mma-rmq",
+            "password_hash": "BG5FnRXT5eNHj26AbqzWA/HcgnmDYs39Ca5K5+nmR+ea5Lq/",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-wdpr-cse-rmq",
+            "password_hash": "Lw97OxuDPDekL4UvsBweiXcQ8/GLFvG/50dN+e+ezTYQsUKL",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-xbms-rmq",
+            "password_hash": "xDNRhbIFv3Sex0xoe31TeYggr8kaMNm3znaKH24Hr/sXEIXs",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-gam-mb-rmq",
+            "password_hash": "l1Q4Un3HD7YkPnyPT/EviW4w22XzzyT6X4DfuQ3qLC8t/+GJ",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-wdpr-ra-rmq",
+            "password_hash": "gj0CBbVb1Y1pUhYWa/hYIPjg1ceWRugyMx0DwKaGTAb77jdn",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "devuser",
+            "password_hash": "QWONOu9P4c4yCxOUMzFycuHgH2mpBj6KpHp6cqOc8d7pD1IT",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "monitoring"
+        },
+        {
+            "name": "admin",
+            "password_hash": "+9LhJvuWmheSC4ubM6bh7wQvNcok85suQWgW0feYFq6m77P0",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        },
+        {
+            "name": "gam-exp-rmq-vhl"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "admin",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-mma-rmq",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "admin",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "devuser",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-xbms-rmq",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-cse-rmq",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-cse-rmq",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "devuser",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-mb-rmq",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-ra-rmq",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-ra-rmq",
+            "vhost": "gam-exp-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [
+        {
+            "vhost": "gam-exp-rmq-vhl",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        }
+    ],
+    "queues": [
+        {
+            "name": "XBMS.XBAND.MAGICBAND.AUDQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.MAGICBAND.DLXQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBAND.MAGICBAND.DLXQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBAND.MAGICBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "XBMS.XBAND.DLX",
+                "x-dead-letter-routing-key": "XBMS.XBAND.MCBAND.DLXQB"
+            }
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.MAGICBAND.AUDQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.MAGICBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "XBMS.XBANDREQUEST.DLX",
+                "x-dead-letter-routing-key": "XBMS.XBANDREQ.MCBAND.DLXQB"
+            }
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.MAGICBAND.ALTQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBAND.MAGICBAND.ALTQ",
+            "vhost": "gam-exp-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "XBMS.XBAND.ALT",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBAND.DLX",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.DLX",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "XBMS.XBAND.ALT"
+            }
+        },
+        {
+            "name": "XBMS.XBANDREQUEST.ALT",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "XBMS.XBANDREQUEST",
+            "vhost": "gam-exp-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "XBMS.XBANDREQUEST.ALT"
+            }
+        }
+    ],
+    "bindings": [
+        {
+            "source": "XBMS.XBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBAND.MAGICBAND.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBAND.MAGICBAND",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBAND",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBAND",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBAND.MAGICBAND",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBAND.MCBAND",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBAND.ALT",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBAND.MAGICBAND.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBAND.DLX",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBAND.MAGICBAND.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBAND.MCBAND.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBANDREQUEST",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBANDREQUEST.MAGICBAND.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBANDREQUEST",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBANDREQUEST.MAGICBAND",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBANDREQ",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBANDREQUEST",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBANDREQUEST.MAGICBAND",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBANDREQ.MCBAND",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBANDREQUEST.ALT",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBANDREQUEST.MAGICBAND.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "XBMS.XBANDREQUEST.DLX",
+            "vhost": "gam-exp-rmq-vhl",
+            "destination": "XBMS.XBANDREQUEST.MAGICBAND.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "XBMS.XBANDREQ.MCBAND.DLXQB",
+            "arguments": {}
+        }
+    ]
+}

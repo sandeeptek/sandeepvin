@@ -1,0 +1,1687 @@
+{
+    "rabbit_version": "3.6.6",
+    "users": [
+        {
+            "name": "f-wdpr-mma-rmq",
+            "password_hash": "mGLy4vP3E3kyhf/fhHOHz5V5TKsI7TGy0oTz007xdjHsZkhy",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-gam-appd-rmq",
+            "password_hash": "gijInY4CzrGfUO5hTzFkqtyqJojeQQB27st5iYPBR9s7hHCs",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-wdpr-cse-rmq",
+            "password_hash": "YThINRTePzee/tOqRj1LEunxuRvDcZ62+g64kRnz3HSe9Tqr",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-mb-rmq",
+            "password_hash": "ID+QFlBS1c64t9/5O0TOwmnPO0kl1LfRt0fAJsZh6/P1gEVv",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-gam-affil-rmq",
+            "password_hash": "r/7K80zBQUWRZ5/hzxaksZyrRPdIXlE6KaTi4+YyIB6bWjoz",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-wdpr-ra-rmq",
+            "password_hash": "763e6RRO53D4xO7wCR6YAxO56cgWXHNuG9WBUkWDeODoaR6E",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "admin",
+            "password_hash": "GaLlcdc//t3Jzmn2vUrVipxtcH2XsnQIw1NkoKDaVwZUY5PC",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-enttl-rmq",
+            "password_hash": "0tZoeHozCA6R/WJCBUyBcVWVFMT3nhZMj+3U1hBF4+hD3V8l",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "gam-dreams-rmq-vhl"
+        },
+        {
+            "name": "/"
+        },
+        {
+            "name": "GAM"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "f-wdpr-ra-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "admin",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "admin",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-cse-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-mb-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-affil-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-appd-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-enttl-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-mma-rmq",
+            "vhost": "gam-dreams-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [
+        {
+            "value": {
+                "src-uri": "amqp:///%2F",
+                "src-queue": "DREAMS.RESORTS.AUDIT.QUEUE",
+                "dest-uri": "amqp:///%2F",
+                "prefetch-count": 1000,
+                "add-forward-headers": false,
+                "ack-mode": "on-confirm",
+                "delete-after": "queue-length",
+                "dest-queue": "DREAMS.RESORTS.ENTITLEMENT"
+            },
+            "vhost": "/",
+            "component": "shovel",
+            "name": "Move from DREAMS.RESORTS.AUDIT.QUEUE"
+        }
+    ],
+    "policies": [
+        {
+            "vhost": "/",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "ha-all",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "all",
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "gam-dreams-rmq-vhl",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        }
+    ],
+    "queues": [
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.MC.CELEBRATIONS.DLX",
+                "x-dead-letter-routing-key": "DM.MC.CLBRT.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.LEISUREACTIVITY.DLX",
+                "x-dead-letter-routing-key": "DM.LSRATY.ENTTL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TTPACCOUNT.DLX",
+                "x-dead-letter-routing-key": "DM.TTPAC.AFFIL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.MC.CELEBRATIONS.DLX",
+                "x-dead-letter-routing-key": "DM.MC.CLBRT.ENTTL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENT.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.RESORTS.DLX",
+                "x-dead-letter-routing-key": "DM.RESRT.ENTTL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENT.DLXQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.DINING.DLX",
+                "x-dead-letter-routing-key": "DM.DNING.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.LEISUREACTIVITY.DLX",
+                "x-dead-letter-routing-key": "DM.LSRATY.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.DINING.DLX",
+                "x-dead-letter-routing-key": "DM.DNING.ENTTL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS.AUDQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TTPACCOUNT.DLX",
+                "x-dead-letter-routing-key": "DM.TTPAC.ENTTL.DLXQB"
+            }
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.ALTQ",
+            "vhost": "gam-dreams-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TTPACCOUNT.DLX",
+                "x-dead-letter-routing-key": "DM.TTPAC.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.DINING.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.DINING.DLE",
+                "x-dead-letter-routing-key": "DREAMS.DINING.DLE"
+            }
+        },
+        {
+            "name": "DEV_LOCAL.DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TTPACCOUNT.DLE",
+                "x-dead-letter-routing-key": "DM.TTPAC.DLE.ENTTL"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TTPACCOUNT.DLE",
+                "x-dead-letter-routing-key": "DM.TTPAC.DLE.AFFIL"
+            }
+        },
+        {
+            "name": "DREAMS.DINING.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.QUEUE.DEV_LOCAL",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS.PERF.AUDIT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.DLE.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.LEISUREACTIVITY.DLE",
+                "x-dead-letter-routing-key": "/DREAMS.LEISUREACTIVITY.DLE"
+            }
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENT.AUDIT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.AUDIT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.AUDIT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TEMP.NULL",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.DLE.ENTITLEMENTS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TPS.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.DINING.DLX",
+                "x-dead-letter-routing-key": "DM.DNING.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.TPS.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.RESORTS.DLX",
+                "x-dead-letter-routing-key": "DM.RESRT.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.RESORTS.DLE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.MC.CELEBRATIONS.DLE",
+                "x-dead-letter-routing-key": "DM.MC.CLB.DLE"
+            }
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.AUDIT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.LEISUREACTIVITY.DLX",
+                "x-dead-letter-routing-key": "DM.LSRATY.ENTTL.DLX"
+            }
+        },
+        {
+            "name": "DREAMS.RESORTS.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.RESORTS.DLE",
+                "x-dead-letter-routing-key": "DREAMS.RESORTS.DLE"
+            }
+        },
+        {
+            "name": "DREAMS.TPS.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "DREAMS.TPS.DLX",
+                "x-dead-letter-routing-key": "DM.TPS.ENTTL.DLX"
+            }
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "DREAMS.TTPACCOUNT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.TTPACCOUNT.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.DINING",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.DINING.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.LEISUREACTIVITY.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.DINING.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.RESORTS.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.MC.CELEBRATIONS.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.MC.CELEBRATIONS.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TPS.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING",
+            "vhost": "/",
+            "type": "headers",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.DINING.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TPS",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.TPS.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.LEISUREACTIVITY.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.TTPACCOUNT",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.TTPACCOUNT.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.TPS.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "hystrix-stream-latest",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "DREAMS.RESORTS.ALT"
+            }
+        },
+        {
+            "name": "DREAMS.LEISUREACTIVITY.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.MC.CELEBRATIONS.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.DINING.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "springCloudHystrixStream",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.DEV_LOCAL",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "DREAMS.RESORTS.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENT.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENT.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.DINING.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT.ENTTL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY.ENTTL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT.ENTTL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.RESORTS.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.RESORTS.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.RESORTS.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.RESORTS.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT.ENTTL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "destination_type": "exchange",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "destination_type": "exchange",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.ALT",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.AFFIL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.ENTTL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.ENTITLEMENTS",
+            "vhost": "gam-dreams-rmq-vhl",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.AUDIT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.AUDIT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DREAMS.DINING",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.DINING.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.DINING.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.DNING.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "/",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "/",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.AUDIT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY",
+            "vhost": "/",
+            "destination": "DREAMS.LEISUREACTIVITY.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DREAMS.LEISUREACTIVITY",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.LEISUREACTIVITY.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.LEISUREACTIVITY.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.LEISUREACTIVITY.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.LSRATY.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "/",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLB",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS",
+            "vhost": "/",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.MC.CELEBRATIONS.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.MC.CELEBRATIONS.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.MC.CELEBRATIONS.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.MC.CLBRT.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.ENTITLEMENT.AUDIT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.ENTITLEMENT.AUDIT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "DREAMS.RESORTS",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.DEV_LOCAL",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.QUEUE.DEV_LOCAL",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.DLE",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.DLE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.RESORTS.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.RESORTS.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.RESRT.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TPS",
+            "vhost": "/",
+            "destination": "DREAMS.TPS.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.TPS",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TPS.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.TPS.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TPS.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.TPS.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.TPS.ENTTL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS.PERF.AUDIT",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENT",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.ALT",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLE",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.DLE.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.DLE.AFFIL",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLE",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.DLE.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.DLE.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.AFFILIATIONS.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.AFFIL.DLX",
+            "arguments": {}
+        },
+        {
+            "source": "DREAMS.TTPACCOUNT.DLX",
+            "vhost": "/",
+            "destination": "DREAMS.TTPACCOUNT.ENTITLEMENT.DLX",
+            "destination_type": "queue",
+            "routing_key": "DM.TTPAC.ENTTL.DLX",
+            "arguments": {}
+        }
+    ]
+}

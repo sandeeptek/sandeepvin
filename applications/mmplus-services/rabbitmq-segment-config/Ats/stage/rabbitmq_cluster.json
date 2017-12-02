@@ -1,0 +1,695 @@
+{
+    "rabbit_version": "3.6.6",
+    "users": [
+        {
+            "name": "f-wdpr-mma-rmq",
+            "password_hash": "zMwByDhN5EqA9ITqJje+rdqTtRPVwqHt/V8rYaKbCnQfsC6U",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-gam-appd-rmq",
+            "password_hash": "fKs3p3FmjihoPN2rjB/lMGLFEx4QeuHNrhpfuIzxx+rdLUW8",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-wdpr-cse-rmq",
+            "password_hash": "dfC4A84Hj2x7WYjrSLotPWlYTUeJ3gevZlsapim5CSKiqiJO",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-mb-rmq",
+            "password_hash": "n+ZmVQgmJw4JC0DJuj41IZ3rghSE2tV3A9jrqY3Y9q+jzTk2",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "appduser",
+            "password_hash": "CjFqfeT97Yd4wcQsZlhGcCyU/rb/aBIpv+kPUjZTgCPA4lAj",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-affil-rmq",
+            "password_hash": "INNk3S7T7GIJTStRfjiqe+7S0jHgWSTuQJIrKs8zr7ysIeQ2",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "f-wdpr-ra-rmq",
+            "password_hash": "DUzG1K5ons7sLbd9K1egSeM44lU+Q7JE/ineP4O0SdAvKRZi",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "admin",
+            "password_hash": "cU0xoIzVXfkmUj623HDZcVdjbWDO0dtmsPg3QcrhtR35fiTL",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-gam-enttl-rmq",
+            "password_hash": "68di6G9WxNUZYexD2s2abZfK8ZtW2KNGjht6WDTlmj0eBOWT",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        },
+        {
+            "name": "gam-ats-rmq-vhl"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "f-gam-mb-rmq",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-enttl-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "admin",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "admin",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-mma-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-appd-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-mb-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "appduser",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-gam-affil-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-ra-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-wdpr-cse-rmq",
+            "vhost": "gam-ats-rmq-vhl",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [
+        {
+            "vhost": "/",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "gam-ats-rmq-vhl",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        },
+        {
+            "vhost": "/",
+            "name": "ha-all",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "all",
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        }
+    ],
+    "queues": [
+        {
+            "name": "TICKETING.ENTITLEMENT.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ENTITLEMENT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLE",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.DLE.AFFIL"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLQ.XI",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLE.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AUDIT",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLE",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.DLE.XI"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS.AUDQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI.DLXQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS.DLXQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ALTQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI.AUDQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLX",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.ENTLS.DLXQB"
+            }
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "ATS.ADMISSION.CONSUMPTION.DLX",
+                "x-dead-letter-routing-key": "ATS.ADMSN.CNSMN.ENTLS"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLX",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.XI.DLXQB"
+            }
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLX",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.AFFIL.DLXQB"
+            }
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.ALTQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ENTITLEMENTS.DLXQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS.AUDQ",
+            "vhost": "gam-ats-rmq-vhl",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLE",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "TICKETING.ENTITLEMENT.ALT"
+            }
+        },
+        {
+            "name": "hystrixStreamLatest",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "springCloudHystrixStream",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "TICKETING.ENTITLEMENT.ALT"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION.ALT",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "ATS.ADMISSION.CONSUMPTION",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "headers",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "ATS.ADMISSION.CONSUMPTION.ALT"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "gam-ats-rmq-vhl",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.AUDIT",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.XI",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLE",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.DLE.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.DLE.AFFIL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLE",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.DLQ.XI",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.DLE.XI",
+            "arguments": {}
+        },
+        {
+            "source": "ATS.ADMISSION.CONSUMPTION",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "ATS.ADMISSION.CONSUMPTION",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "ATS.ADMSN.CNSMN.ENTLS",
+            "arguments": {}
+        },
+        {
+            "source": "ATS.ADMISSION.CONSUMPTION.ALT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "ATS.ADMISSION.CONSUMPTION.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "ATS.ADMISSION.CONSUMPTION.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "ATS.ADMISSION.CONSUMPTION.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "ATS.ADMSN.CNSMN.ENTLS.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "destination_type": "exchange",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "destination_type": "exchange",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.XI",
+            "destination_type": "exchange",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.XI",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ALTQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.AFFIL.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ENTITLEMENTS.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.ENTLS.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.XI.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.XI.DLXQB",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.ENTITLEMENTS",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.ENTITLEMENTS.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.XI",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "gam-ats-rmq-vhl",
+            "destination": "TICKETING.ENTITLEMENT.XI.AUDQ",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        }
+    ]
+}

@@ -1,0 +1,200 @@
+{
+    "rabbit_version": "3.6.6",
+    "users": [
+        {
+            "name": "WDPR_AOE_ACCESS",
+            "password_hash": "bnS5JPxirXhRNliE/NUAU+vvW5/Ym4cRqoIt8HpEpYNFVxA4",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "monitoring"
+        },
+        {
+            "name": "esmuser",
+            "password_hash": "geRVnz4CeFF/TGnzZksqu8dy5aVFG+0MPPwDwEfEGmQ/kj/m",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "monitoring"
+        },
+        {
+            "name": "admin",
+            "password_hash": "92Q+AsmwJL6utVc9hWHU7tYPEQ7SYOsO6/UyDRL6YkfcUPew",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        },
+        {
+            "name": "f-xi-rabbit-prod",
+            "password_hash": "m9Y79LIysTfM3zwc+pkAkmzBO7/mhK8/gnzVKeJxkCO1eKzu",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "gamrmqproduser",
+            "password_hash": "l3u6Xdqmjsj5wmlupUB0UooB67LNpS9Ko6SK/V8RQ0dNTE91",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "monitoring"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "admin",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "WDPR_AOE_ACCESS",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "gamrmqproduser",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "esmuser",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "f-xi-rabbit-prod",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [
+        {
+            "vhost": "/",
+            "name": "ha-exactly",
+            "pattern": "^",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "exactly",
+                "ha-params": 3,
+                "ha-sync-mode": "automatic"
+            },
+            "priority": 0
+        }
+    ],
+    "queues": [
+        {
+            "name": "TICKETING.ENTITLEMENT.ALT.QUEUE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLX",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.AFFIL.DLK"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLE.AFFILIATIONS",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-dead-letter-exchange": "TICKETING.ENTITLEMENT.DLX",
+                "x-dead-letter-routing-key": "TCKTG.ENTTL.XI.DLXQB"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.XI.DLXQ",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {
+                "alternate-exchange": "TICKETING.ENTITLEMENT.ALT"
+            }
+        },
+        {
+            "name": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "TICKETING.ENTITLEMENT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.ALT",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.ALT.QUEUE",
+            "destination_type": "queue",
+            "routing_key": "#",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.DLE.AFFILIATIONS",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.AFFIL.DLK",
+            "arguments": {}
+        },
+        {
+            "source": "TICKETING.ENTITLEMENT.DLX",
+            "vhost": "/",
+            "destination": "TICKETING.ENTITLEMENT.XI.DLXQ",
+            "destination_type": "queue",
+            "routing_key": "TCKTG.ENTTL.XI.DLXQB",
+            "arguments": {}
+        }
+    ]
+}
